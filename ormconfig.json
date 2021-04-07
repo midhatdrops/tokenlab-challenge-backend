@@ -7,11 +7,11 @@
   "database": "tokenlab",
   "synchronize": true,
   "logging": false,
-  "entities": ["src/database/entity/**/*.ts"],
+  "entities": ["src/database/models/**/*.ts"],
   "migrations": ["src/database/migration/**/*.ts"],
   "subscribers": ["src/database/subscriber/**/*.ts"],
   "cli": {
-    "entitiesDir": "src/database/entity",
+    "entitiesDir": "src/database/models",
     "migrationsDir": "src/database/migration",
     "subscribersDir": "src/database/subscriber"
   }
