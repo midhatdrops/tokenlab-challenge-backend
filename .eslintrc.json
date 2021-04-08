@@ -4,7 +4,8 @@
         "node": true
     },
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -17,6 +18,8 @@
     ],
     "rules": {
         "import/prefer-default-export": "off",
-        "camelcase": "off"
+        "camelcase": "off",
+        "import/extensions": "off",
+        "import/no-unresolved": "off"
     }
 }
