@@ -1,10 +1,4 @@
-import * as express from 'express';
-import Routes from './routes/index';
-
-const app = express();
-
-app.use(express.json());
-app.use(Routes);
+import app from './app';
 
 const port = 3000;
 

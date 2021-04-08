@@ -24,6 +24,7 @@
     "typescript": "3.3.3333"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "mysql": "^2.14.1",
     "reflect-metadata": "^0.1.10",
@@ -33,6 +34,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
-    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules ./src/server.ts"
+    "dev": "ts-node-dev --transpile-only --ignore-watch node_modules ./src/server.ts",
+    "test": "cross-env-shell NODE_ENV=test jest --no-cache"
   }
 }
