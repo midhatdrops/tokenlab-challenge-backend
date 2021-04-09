@@ -10,6 +10,11 @@ const routes = Router();
 routes.get('/api/events', (req: Request, res: Response) =>
   eventController.findAll(res)
 );
+
+routes.get('/api/events/user/', (req: Request, res: Response) =>
+  eventController.findByUser(req, res)
+);
+
 routes.get('/api/events/:id', (req: Request, res: Response) =>
   eventController.findOne(req, res)
 );

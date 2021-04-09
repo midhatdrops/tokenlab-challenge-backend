@@ -34,7 +34,7 @@ export class EventController {
     });
 
     await eventRepository.save(newEvent);
-    const Event = eventRepository.findOne({ description });
+    const Event = await eventRepository.findOne({ description });
     return res.status(201).json(Event);
   }
 
@@ -52,6 +52,15 @@ export class EventController {
       return res.status(404).json({ message: 'Event not found' });
     }
     return res.status(200).json(event);
+  }
+
+  async findByUser(req: Request, res: Response) {
+    const eventRepository = getCustomRepository(EventRepository);
+    const token = extractToken(req);
+    const user = await JWTDecoder.getUserByToken(token);
+    const events = await eventRepository.find({ user });
+    if (!events) return res.status(404).json({ message: 'not found' });
+    return res.status(200).json(events);
   }
 
   async update(req: Request, res: Response) {
