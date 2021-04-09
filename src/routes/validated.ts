@@ -23,8 +23,13 @@ routes.delete('/api/events/:id', (req: Request, res: Response) =>
   eventController.delete(req, res)
 );
 
+// users Routes
+
 routes.get('/api/users/', (req: Request, res: Response) =>
   userController.findAll(req, res)
+);
+routes.post('/api/users', (req: Request, res: Response) =>
+  userController.create(req, res)
 );
 
 export default routes;

@@ -1,13 +1,17 @@
 import 'reflect-metadata';
 import * as express from 'express';
-import Routes from './routes/index';
+import ValidatedRoutes from './routes/validated';
+import nonAuthRoutes from './routes/nonValidated';
 import createConnection from './database/index';
-
-const app = express();
+import { jwtValidate } from './middlewares/jwtValidate';
 
 createConnection();
 
+const app = express();
+
 app.use(express.json());
-app.use(Routes);
+app.use(nonAuthRoutes);
+app.use(jwtValidate);
+app.use(ValidatedRoutes);
 
 export { app };
