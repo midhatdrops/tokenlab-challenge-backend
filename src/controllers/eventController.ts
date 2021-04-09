@@ -1,16 +1,31 @@
 /* eslint-disable class-methods-use-this */
+import * as yup from 'yup';
 import { getCustomRepository } from 'typeorm';
 import { Response, Request } from 'express';
 import { EventRepository } from '../repository/eventsRepository';
+import { JWTDecoder } from '../utils/jwtDecoder';
+import { extractToken } from '../utils/ExtractToken';
 
 export class EventController {
   async create(req: Request, res: Response) {
-    const { description, initTime, finishTime, user } = req.body;
     const eventRepository = getCustomRepository(EventRepository);
+    const schema = yup.object().shape({
+      description: yup.string().required().min(5),
+      initTime: yup.date().required(),
+      finishTime: yup.date().required(),
+    });
+    try {
+      await schema.validate(req.body, { abortEarly: false });
+    } catch (err) {
+      return res.status(404).json({ errors: err.errors });
+    }
+    const { description, initTime, finishTime } = req.body;
     const eventAlreadyExists = await eventRepository.findOne({ description });
     if (eventAlreadyExists) {
       throw new Error('Event Already Exists!');
     }
+    const token = extractToken(req);
+    const user = await JWTDecoder.getUserByToken(token);
     const newEvent = eventRepository.create({
       description,
       initTime,
