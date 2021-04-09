@@ -1,4 +1,5 @@
 /* eslint-disable no-shadow */
+import 'reflect-metadata';
 import { createConnection, getConnection, getConnectionOptions } from 'typeorm';
 
 const connection = {

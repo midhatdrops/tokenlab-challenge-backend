@@ -2,10 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import { Event } from './Event';
 
 @Entity('users')
 export class User {
@@ -26,6 +28,9 @@ export class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Event, (event) => event.user)
+  events: Event[];
 
   constructor() {
     if (!this.id) {
