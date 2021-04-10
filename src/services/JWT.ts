@@ -10,7 +10,8 @@ const userController = new UserController();
 export class JWTService {
   async createToken(email: string, password: string) {
     const user = await userController.findByEmail(email);
-    if (!Encrypter.compare(password, user.password)) {
+    const validate = await Encrypter.compare(password, user.password);
+    if (!validate) {
       return null;
     }
     const token = jwt.sign({ email, password }, process.env.AUTH_SECRET, {

@@ -18,7 +18,7 @@ export class LoginController {
     const { email, password } = req.body;
     const token = await jwtService.createToken(email, password);
     if (!token)
-      return res.status(500).json({ message: 'Email/Password incorrect' });
+      return res.status(403).json({ message: 'Email/Password incorrect' });
     return res.status(200).json(token);
   }
 }
