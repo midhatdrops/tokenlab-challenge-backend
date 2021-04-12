@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { User } from './User';
 
-@Entity('events')
+@Entity('Event')
 export class Event {
   @PrimaryGeneratedColumn()
   id: number;
@@ -16,8 +16,11 @@ export class Event {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ unique: true })
   initTime: Date;
+
+  @Column()
+  month: number;
 
   @Column()
   finishTime: Date;

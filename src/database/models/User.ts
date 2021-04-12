@@ -9,7 +9,7 @@ import {
 import { v4 as uuid } from 'uuid';
 import { Event } from './Event';
 
-@Entity('users')
+@Entity('User')
 export class User {
   @PrimaryColumn()
   readonly id: string;

@@ -15,7 +15,7 @@ export class JWTService {
       return null;
     }
     const token = jwt.sign({ email, password }, process.env.AUTH_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '1d',
     });
     return token;
   }
