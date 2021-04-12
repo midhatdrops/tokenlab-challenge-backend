@@ -60,7 +60,6 @@ export class EventController {
 
   async findByMonth(req: Request, res: Response) {
     const eventRepository = getCustomRepository(EventRepository);
-    // const month = Number(req.params.month);
     const testDate = new Date(`2021-04-01 00:00:00`);
     const AddedDays = (date: Date) => Between(date, addDays(date, 30));
 
@@ -80,7 +79,6 @@ export class EventController {
     const eventRepository = getCustomRepository(EventRepository);
     const token = extractToken(req);
     const user = await JWTDecoder.getUserByToken(token);
-    console.log(month);
     const events = await eventRepository.find({
       where: {
         month,
@@ -93,7 +91,6 @@ export class EventController {
 
   async update(req: Request, res: Response) {
     const { description, initTime, finishTime, month } = req.body;
-    console.log(description, initTime, finishTime);
     const eventRepository = getCustomRepository(EventRepository);
     const id = Number(req.params.id);
     if (!description || !initTime || !finishTime || !month) {
